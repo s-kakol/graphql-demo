@@ -3,9 +3,18 @@ const authors = require('./data/authors');
 const books = require('./data/books');
 
 const typeDefs = gql`
+  type Book {
+    title: String!
+    published: Int!
+    author: String!
+    id: ID!
+    genres: [String!]!
+  }
+
   type Query {
     authorCount: Int!
     booksCount: Int!
+    allBooks: [Book!]!
   }
 `;
 
@@ -13,6 +22,7 @@ const resolvers = {
   Query: {
     authorCount: () => authors.length,
     booksCount: () => books.length,
+    allBooks: () => books,
   },
 };
 
